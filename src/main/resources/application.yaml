@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: batch-sample
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  batch:
+    jdbc:
+      initialize-schema: always
