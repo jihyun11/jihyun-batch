@@ -20,7 +20,7 @@ repositories {
 
 dependencies {
 	implementation("com.h2database:h2:2.2.224")
-	implementation("org.hsqldb:hsqldb:2.7.4")
+	implementation("io.github.microutils:kotlin-logging:3.0.5")
 	implementation("org.springframework.boot:spring-boot-starter-batch")
 
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
