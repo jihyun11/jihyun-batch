@@ -21,25 +21,25 @@ class BasicTaskJobConfiguration(
     @Bean
     fun greetingTasklet(): Tasklet = GreetingTask()
 
-    @Bean
-    fun step(
-        jobRepository: JobRepository,
-    ): Step {
-        log.info { "------------------ Init myStep -----------------" }
-        return StepBuilder("myStep", jobRepository)
-            .tasklet(greetingTasklet(), transactionManager)
-            .build()
-    }
-
-    @Bean
-    fun myJob(
-        step: Step,
-        jobRepository: JobRepository,
-    ): Job {
-        log.info { "------------------ Init myJob -----------------" }
-        return JobBuilder("myJob", jobRepository)
-            .incrementer(RunIdIncrementer())
-            .start(step)
-            .build()
-    }
+//    @Bean
+//    fun step(
+//        jobRepository: JobRepository,
+//    ): Step {
+//        log.info { "------------------ Init myStep -----------------" }
+//        return StepBuilder("myStep", jobRepository)
+//            .tasklet(greetingTasklet(), transactionManager)
+//            .build()
+//    }
+//
+//    @Bean
+//    fun myJob(
+//        step: Step,
+//        jobRepository: JobRepository,
+//    ): Job {
+//        log.info { "------------------ Init myJob -----------------" }
+//        return JobBuilder("myJob", jobRepository)
+//            .incrementer(RunIdIncrementer())
+//            .start(step)
+//            .build()
+//    }
 }
