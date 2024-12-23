@@ -1,5 +1,6 @@
-package com.schooldevops.spring_batch.batch_sample
+package com.schooldevops.spring_batch.batch_sample.jdbc
 
+import com.schooldevops.spring_batch.batch_sample.Customer
 import mu.KotlinLogging
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.Step

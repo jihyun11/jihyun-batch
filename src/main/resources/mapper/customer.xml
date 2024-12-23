@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.schooldevops.spring_batch.batch_sample.mybatis">
+
+    <resultMap id="customerResult" type="com.schooldevops.spring_batch.batch_sample.Customer">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="age" column="age"/>
+        <result property="gender" column="gender"/>
+    </resultMap>
+
+    <select id="selectCustomers" resultMap="customerResult">
+        SELECT id, name, age, gender
+        FROM customer LIMIT #{_skiprows}, #{_pagesize}
+    </select>
+
+    <insert id="insertCustomers" parameterType="com.schooldevops.spring_batch.batch_sample.Customer">
+        INSERT INTO customer2(name, age, gender)
+        VALUES (#{name}, #{age}, #{gender});
+    </insert>
+
+</mapper>
