@@ -33,6 +33,6 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      name: DELETE_USER_IMAGE_JOB
+      name: updateProductStatusJob
 mybatis:
   mapper-locations: classpath:mapper/*.xml
