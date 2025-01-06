@@ -1,7 +1,5 @@
 package com.schooldevops.spring_batch.batch_sample.querydsl
 
-import com.schooldevops.spring_batch.batch_sample.CustomItemProcessor
-import com.schooldevops.spring_batch.batch_sample.Customer
 import jakarta.persistence.EntityManagerFactory
 import mu.KotlinLogging
 import org.springframework.batch.core.Job
@@ -27,22 +25,22 @@ class QuerydslPagingReaderJobConfig(
     private val logger = KotlinLogging.logger {}
 
     @Bean
-    fun customerQuerydslPagingItemReader(): QuerydslPagingItemReader<Customer> {
-        return QuerydslPagingItemReaderBuilder<Customer>()
+    fun customerQuerydslPagingItemReader(): QuerydslPagingItemReader<CustomerEntity> {
+        return QuerydslPagingItemReaderBuilder<CustomerEntity>()
             .name("customerQuerydslPagingItemReader")
             .entityManagerFactory(entityManagerFactory)
             .chunkSize(CHUNK_SIZE)
             .querySupplier { jpaQueryFactory ->
-                jpaQueryFactory.select(QCustomer.customer)
-                    .from(QCustomer.customer)
-                    .where(QCustomer.customer.age.gt(20))
+                jpaQueryFactory.select(QCustomerEntity.customerEntity)
+                    .from(QCustomerEntity.customerEntity)
+                    .where(QCustomerEntity.customerEntity.age.gt(20))
             }
             .build()
     }
 
     @Bean
-    fun customerQuerydslFlatFileItemWriter(): FlatFileItemWriter<Customer> {
-        return FlatFileItemWriterBuilder<Customer>()
+    fun customerQuerydslFlatFileItemWriter(): FlatFileItemWriter<CustomerEntity> {
+        return FlatFileItemWriterBuilder<CustomerEntity>()
             .name("customerQuerydslFlatFileItemWriter")
             .resource(FileSystemResource("./output/customer_new_v2.csv"))
             .encoding(ENCODING)
@@ -56,7 +54,7 @@ class QuerydslPagingReaderJobConfig(
         logger.info("------------------ Init customerQuerydslPagingStep -----------------")
 
         return StepBuilder("customerJpaPagingStep", jobRepository)
-            .chunk<Customer, Customer>(CHUNK_SIZE, transactionManager)
+            .chunk<CustomerEntity, CustomerEntity>(CHUNK_SIZE, transactionManager)
             .reader(customerQuerydslPagingItemReader())
             .processor(CustomItemProcessor())
             .writer(customerQuerydslFlatFileItemWriter())
