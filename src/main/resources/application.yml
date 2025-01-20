@@ -33,6 +33,6 @@ spring:
     jdbc:
       initialize-schema: always
     job:
-      name: updateProductStatusJob
+      name: NEXT_STEP_TASK
 mybatis:
   mapper-locations: classpath:mapper/*.xml
