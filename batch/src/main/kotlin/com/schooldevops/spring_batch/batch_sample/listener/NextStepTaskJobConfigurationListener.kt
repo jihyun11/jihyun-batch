@@ -13,7 +13,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.transaction.PlatformTransactionManager
 
 @Configuration
-class NextStepTaskJobConfiguration {
+class NextStepTaskJobConfigurationListener {
     @Bean(name = ["step01"])
     fun step01(
         jobRepository: JobRepository,
